@@ -23,3 +23,12 @@ Transcript show: moreThanX size asString; cr.
 "Figure out how many odd numbers are in the input"
 areOdd := depths select: [ :each | each odd ].
 Transcript show: areOdd size asString; cr.
+
+increasingCount := 0
+
+(1 to: ((depths size) - 1)) do: [
+  :i | ((depths at: i) < (depths at: i + 1))
+    ifTrue: [increasingCount := increasingCount + 1].
+].
+
+increasingCount printNl.
