@@ -21,7 +21,7 @@ stream close.
 
 Object subclass: Coordinates [
   <comment: 'a class that contains horizontal and vertical coordiantes'>
-  | horizontal vertical |
+  | horizontal vertical aim |
 
   Coordinates class >> new [
     ^ self basicNew initialize
@@ -30,6 +30,7 @@ Object subclass: Coordinates [
   initialize [
     vertical := 0.
     horizontal := 0.
+    aim := 0
   ]
 
   horizontal [
@@ -38,6 +39,14 @@ Object subclass: Coordinates [
 
   vertical [
     ^ vertical
+  ]
+
+  aim [
+    ^ aim
+  ]
+
+  adjustAim: change [
+    aim := aim + change.
   ]
 
   moveHorizontal: change [
@@ -73,7 +82,7 @@ Object subclass: Submarine [
 
   down: change [
   <comment: 'reposition the sub closer to seabed'>
-    coords moveVertical: change.
+    coords adjustAim: change.
   ]
 
   up: change [
@@ -84,6 +93,7 @@ Object subclass: Submarine [
   forward: change [
   <comment: 'move forwards by an amount'>
     coords moveHorizontal: change.
+    coords moveVertical: ((coords aim) * change).
   ]
 ]
 
