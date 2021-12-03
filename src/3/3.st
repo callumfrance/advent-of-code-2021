@@ -5,21 +5,6 @@ See here for the problem statement
 https://adventofcode.com/2021/day/3
 "
 
-| fileName stream binary |
-
-fileName := 'input.txt'.
-stream := (FileStream open: fileName mode: FileStream read).
-binary := OrderedCollection new.
-
-[stream atEnd] whileFalse:[
-  | eachLine y |
-  eachLine := stream nextLine.
-  binary add: eachLine.
-].
-
-stream close.
-
-
 Object subclass: Diagnostics [
   | gammaRate epsilonRate |
 
@@ -35,22 +20,48 @@ Object subclass: Diagnostics [
   setEpsilonRate: inEpsilonRate [ epsilonRate := inEpsilonRate. ]
 ]
 
-Object subclass: InputManipulation [
-  
-  " 
-  not sure if there is a native way to convert binary strings into raw binary,
-  but there is the bitwise specification
-  e.g. 16rFF = 255
+| fileName stream lineLength binary dumbString dumberString d |
 
-  convert a string to a binary value
-  2r<VALUE>
+fileName := 'input.txt'.
+stream := (FileStream open: fileName mode: FileStream read).
+lineLength := (stream nextLine) size.
+binary := Array new: lineLength.
+(1 to: lineLength) do: [:i | binary at: i put: 0 ].
+stream position: 0.
 
-  iterate through each character in the string in reverse
-  add to the value somehow
-  "
+[stream atEnd] whileFalse: [
+  | eachLine index |
+  eachLine := stream nextLine.
+  index := 1.
 
-]
+  eachLine do: [:a |
 
-x := Diagnostics new.
-x setGammaRate: 5.
-x setEpsilonRate: 7.
+    binary at: index put:
+      (((a asString asNumber) = 0)
+        ifTrue: [(binary at: index) - 1]
+        ifFalse: [(binary at: index) + 1]).
+
+    index := index + 1.
+  ].
+].
+
+stream close.
+
+dumbString := ''.
+dumberString := ''.
+
+binary do: [:a | (a < 0)
+  ifTrue: [
+    dumbString := dumbString, '0'.
+    dumberString := dumberString, '1'
+    ]
+  ifFalse: [
+    dumbString := dumbString, '1'.
+    dumberString := dumberString, '0'
+    ]
+].
+
+d := Diagnostics new.
+d setGammaRate: (Number readFrom: (ReadStream on: dumbString) radix: 2).
+d setEpsilonRate: (Number readFrom: (ReadStream on: dumberString) radix: 2).
+d powerConsumption printNl.
