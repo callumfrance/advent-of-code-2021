@@ -6,7 +6,7 @@ https://adventofcode.com/2021/day/3
 "
 
 Object subclass: Diagnostics [
-  | gammaRate epsilonRate |
+  | gammaRate epsilonRate oxygenRating carbonRating |
 
   Diagnostics class >> new [ ^ self basicNew initialize. ]
 
@@ -14,10 +14,15 @@ Object subclass: Diagnostics [
 
   gammaRate [ ^ gammaRate ]
   epsilonRate [ ^ epsilonRate ]
+  oxygenRating [ ^ oxygenRating ]
+  carbonRating [ ^ carbonRating ]
   powerConsumption [ ^ gammaRate * epsilonRate. ]
+  lifeSupportRating [ ^ oxygenRating * carbonRating ]
 
   setGammaRate: inGammaRate [ gammaRate := inGammaRate. ]
   setEpsilonRate: inEpsilonRate [ epsilonRate := inEpsilonRate. ]
+  setOxygenRating: in [ oxygenRating := in. ]
+  setCarbonRating: in [ carbonRating := in. ]
 ]
 
 | fileName stream lineLength binary dumbString dumberString d |
