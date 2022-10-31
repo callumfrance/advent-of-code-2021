@@ -7,7 +7,7 @@ https://adventofcode.com/2021/day/1
 
 | fileName stream depths increasingCount slidingWindowCount sum3 |
 
-fileName := 'input.txt'.
+fileName := 'src/1/input.txt'.
 stream := (FileStream open: fileName mode: FileStream read).
 depths := OrderedCollection new.
 

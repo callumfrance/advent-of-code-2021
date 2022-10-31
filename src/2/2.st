@@ -5,7 +5,7 @@ See here for the problem statement
 https://adventofcode.com/2021/day/2
 "
 
-fileName := 'input.txt'.
+fileName := 'src/2/input.txt'.
 stream := (FileStream open: fileName mode: FileStream read).
 commands := OrderedCollection new.
 

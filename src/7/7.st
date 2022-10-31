@@ -6,7 +6,8 @@ https://adventofcode.com/2021/day/7
 "
 
 " fileName := 'test.txt'. "
-fileName := 'input.txt'.
+" fileName := 'input.txt'. "
+fileName := 'src/7/input.txt'.
 stream := (FileStream open: fileName mode: FileStream read).
 horizontalPositions := SortedCollection new.
 

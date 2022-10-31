@@ -27,7 +27,7 @@ Object subclass: Diagnostics [
 
 | fileName stream lineLength binary dumbString dumberString d |
 
-fileName := 'input.txt'.
+fileName := 'src/3/input.txt'.
 stream := (FileStream open: fileName mode: FileStream read).
 lineLength := (stream nextLine) size.
 binary := Array new: lineLength.
