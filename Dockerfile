@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:latest AS small-ubuntu-talk
 
 # Install tools required for project
 # Run `docker build --no-cache .` to update dependencies
